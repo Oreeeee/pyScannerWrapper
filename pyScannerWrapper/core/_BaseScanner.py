@@ -6,16 +6,16 @@ from .structs import ScanResults
 
 
 class BaseScanner:
-    input_ip_list: list
-    input_port_list: list
-    scanner_args: str
-    input_file: str
+    input_ip_list: list = []
+    input_port_list: list = []
+    scanner_args: str = ""
+    input_file: str = ""
     results: ScanResults = None
     running: bool = False
     yield_results: bool = False
-    scanner_name: str
-    default_args: str
-    merged_args: str
+    scanner_name: str = ""
+    default_args: str = ""
+    merged_args: str = ""
 
     def scan(self) -> None:
         """
