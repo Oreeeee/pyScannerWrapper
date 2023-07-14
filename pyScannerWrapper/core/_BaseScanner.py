@@ -1,5 +1,6 @@
 import queue
 import shutil
+import subprocess
 import time
 
 from pyScannerWrapper.exceptions import *
@@ -18,6 +19,7 @@ class BaseScanner:
     default_args: str = ""
     merged_args: str = ""
     queue = None
+    scanner_process: subprocess.Popen = None
 
     def scan(self) -> None:
         """
