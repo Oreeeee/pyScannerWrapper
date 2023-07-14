@@ -7,5 +7,11 @@ setup(
     version=ver,
     description="Easy-to-use Python wrapper for various port scanners. (WIP)",
     author="Oreeeee",
-    packages=["pyScannerWrapper"],
+    packages=[
+        "pyScannerWrapper",
+        "pyScannerWrapper.core",
+        "pyScannerWrapper.core.structs",
+        "pyScannerWrapper.exceptions",
+        "pyScannerWrapper.scanners",
+    ],
 )
