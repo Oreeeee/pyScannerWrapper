@@ -2,7 +2,7 @@
 Easy-to-use Python wrapper for various port scanners. (WIP)
 
 # Supported scanners
-Work in progress!
+- Masscan (incomplete)
 
 # Planned scanners planned to be added
 - Masscan
