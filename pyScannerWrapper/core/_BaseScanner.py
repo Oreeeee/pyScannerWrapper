@@ -32,6 +32,14 @@ class BaseScanner:
         """
         return f"{additional_args} {self.scanner_args} {self.default_args}"
 
+    def scanner_parser(self) -> None:
+        """
+        This method will open a subprocess of the scanner in another thread and yield the parsed IP:Port
+        to the caller scan() method.
+        It is up to the inheriting class to override this method.
+        """
+        pass
+
     def scanner_path_verify(self) -> None:
         """
         This method will check is the scanner present in PATH. If it isn't, it will throw ScannerNotFoundException.
