@@ -1,4 +1,6 @@
+from pyScannerWrapper.exceptions import *
 from .structs import ScanResults
+import shutil
 
 
 class BaseScanner:
@@ -16,9 +18,6 @@ class BaseScanner:
     __default_args: str
 
     # Public methods
-    def __init__(self):
-        pass
-
     def scan(self) -> None:
         """
         This method will scan with the provided scanner.
@@ -27,3 +26,11 @@ class BaseScanner:
         It is up to the inheriting class to override this method.
         """
         pass
+    
+    # Private methods
+    def scanner_path_verify(self) -> None:
+        """
+        This method will check is the scanner present in PATH. If it isn't, it will throw ScannerNotFoundException.
+        """
+        if shutil.which(self.__scanner_name) == None:
+            raise ScannerNotFoundException(f"{self.__scanner_name} not found in PATH")

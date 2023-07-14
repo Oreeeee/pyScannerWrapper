@@ -1,0 +1,2 @@
+class ScannerNotFoundException(Exception):
+    pass
