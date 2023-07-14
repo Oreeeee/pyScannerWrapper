@@ -14,7 +14,7 @@ class Masscan(BaseScanner):
     def __init__(self):
         self.scanner_path_verify()
 
-    def scan(self) -> None:
+    def scan_internal(self) -> None:
         # Initialize results
         self.results = ScanResults(
             scanner_name=self.scanner_name,

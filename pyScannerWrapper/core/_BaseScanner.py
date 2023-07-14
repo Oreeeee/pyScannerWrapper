@@ -21,7 +21,7 @@ class BaseScanner:
     queue = None
     scanner_process: subprocess.Popen = None
 
-    def scan(self) -> None:
+    def scan_internal(self) -> None:
         """
         This method will scan with the provided scanner.
         It shouldn't be executed by the user.
@@ -33,7 +33,7 @@ class BaseScanner:
         """
         This method will start scanning and yield the results from the queue
         """
-        self.scan()
+        self.scan_internal()
         while self.running:
             try:
                 result = self.queue.get_nowait()
@@ -43,11 +43,11 @@ class BaseScanner:
             self.poll_scanner_process()
             time.sleep(0.01)
 
-    def scan_noyield(self) -> None:
+    def scan(self) -> None:
         """
         This method will start scanning and add the results
         """
-        self.scan()
+        self.scan_internal()
         while self.running:
             try:
                 result = self.queue.get_nowait()
