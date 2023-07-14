@@ -25,6 +25,13 @@ class BaseScanner:
         """
         pass
 
+    def merge_args(self, additional_args: str) -> str:
+        """
+        This method merges additional args, user-provided args and default arguments of the inheriting class.
+        Returns the merged string.
+        """
+        return f"{additional_args} {self.scanner_args} {self.default_args}"
+
     def scanner_path_verify(self) -> None:
         """
         This method will check is the scanner present in PATH. If it isn't, it will throw ScannerNotFoundException.

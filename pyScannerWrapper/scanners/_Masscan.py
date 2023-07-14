@@ -1,7 +1,8 @@
-from pyScannerWrapper.core import BaseScanner
-from pyScannerWrapper.core.structs import ScanResults
 import subprocess
 import threading
+
+from pyScannerWrapper.core import BaseScanner
+from pyScannerWrapper.core.structs import ScanResults
 
 
 class Masscan(BaseScanner):
