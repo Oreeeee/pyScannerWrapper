@@ -1,4 +1,5 @@
 from distutils.core import setup
+
 from pyScannerWrapper import __version__ as ver
 
 setup(
