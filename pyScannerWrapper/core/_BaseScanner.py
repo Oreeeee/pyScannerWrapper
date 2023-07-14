@@ -41,7 +41,7 @@ class BaseScanner:
             except queue.Empty:
                 pass
             self.poll_scanner_process()
-            time.sleep(0.5)
+            time.sleep(0.01)
 
     def scan_noyield(self) -> None:
         """
@@ -55,7 +55,7 @@ class BaseScanner:
             except queue.Empty:
                 pass
             self.poll_scanner_process()
-            time.sleep(0.5)
+            time.sleep(0.01)
 
     def merge_args(self, additional_args: str) -> None:
         """
