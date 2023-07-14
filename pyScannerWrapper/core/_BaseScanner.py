@@ -40,7 +40,7 @@ class BaseScanner:
                 yield result
             except queue.Empty:
                 pass
-
+            self.poll_scanner_process()
             time.sleep(0.5)
 
     def scan_noyield(self) -> None:
@@ -54,7 +54,7 @@ class BaseScanner:
                 self.results.results.append(result)
             except queue.Empty:
                 pass
-
+            self.poll_scanner_process()
             time.sleep(0.5)
 
     def merge_args(self, additional_args: str) -> None:
@@ -71,6 +71,14 @@ class BaseScanner:
         It is up to the inheriting class to override this method.
         """
         pass
+
+    def poll_scanner_process(self) -> None:
+        """
+        This method is called in every iteration of scan_yielder() or scan_noyield() method, to check is the scanner still running.
+        It will set running attribute to False if it isn't
+        """
+        if self.scanner_process.poll() != None:
+            self.running = False
 
     def scanner_path_verify(self) -> None:
         """
