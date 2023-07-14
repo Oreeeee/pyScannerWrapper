@@ -9,11 +9,11 @@ class BaseScanner:
     input_file: str
     results: ScanResults = None
     running: bool = False
+    yield_results: bool = False
 
     # Private variables
     __scanner_name: str
     __default_args: str
-    __should_yield: bool
 
     # Public methods
     def __init__(self):
@@ -26,7 +26,4 @@ class BaseScanner:
         If yielding is enabled, it will in addition yield the IP:Port of the server if a online target is found.
         It is up to the inheriting class to override this method.
         """
-        pass
-
-    def scan_yielder(self) -> None:
         pass
