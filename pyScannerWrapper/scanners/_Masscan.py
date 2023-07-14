@@ -43,21 +43,6 @@ class Masscan(BaseScanner):
         # Start the parsing thread
         threading.Thread(target=self.scanner_parser, args=(proc,)).start()
 
-        while self.running:
-            # Poll the results
-            try:
-                result = self.queue.get_nowait()
-                self.results.results.append(result)
-            except queue.Empty:
-                pass
-
-            # Check is masscan dead
-            if proc.poll() != None:
-                # Stop running
-                self.running = False
-
-            time.sleep(0.5)  # Sleep to not use the CPU 100%
-
     def scanner_parser(self, proc: subprocess.Popen) -> None:
         while self.running:
             for line in iter(proc.stdout.readline, b""):

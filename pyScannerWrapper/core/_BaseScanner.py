@@ -1,5 +1,6 @@
 import queue
 import shutil
+import time
 
 from pyScannerWrapper.exceptions import *
 
@@ -22,11 +23,38 @@ class BaseScanner:
     def scan(self) -> None:
         """
         This method will scan with the provided scanner.
-        It doesn't return anything, and will instead set the results property of the class.
-        If yielding is enabled, it will in addition yield the IP:Port of the server if a online target is found.
+        It shouldn't be executed by the user.
         It is up to the inheriting class to override this method.
         """
         pass
+
+    def scan_yielder(self) -> any:
+        """
+        This method will start scanning and yield the results from the queue
+        """
+        self.scan()
+        while self.running:
+            try:
+                result = self.queue.get_nowait()
+                yield result
+            except queue.Empty:
+                pass
+
+            time.sleep(0.5)
+
+    def scan_noyield(self) -> None:
+        """
+        This method will start scanning and add the results
+        """
+        self.scan()
+        while self.running:
+            try:
+                result = self.queue.get_nowait()
+                self.results.results.append(result)
+            except queue.Empty:
+                pass
+
+            time.sleep(0.5)
 
     def merge_args(self, additional_args: str) -> None:
         """
