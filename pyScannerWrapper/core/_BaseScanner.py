@@ -1,3 +1,4 @@
+import queue
 import shutil
 
 from pyScannerWrapper.exceptions import *
@@ -16,6 +17,7 @@ class BaseScanner:
     scanner_name: str = ""
     default_args: str = ""
     merged_args: str = ""
+    queue = None
 
     def scan(self) -> None:
         """
