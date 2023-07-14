@@ -14,7 +14,6 @@ class BaseScanner:
     input_file: str = ""
     results: ScanResults = None
     running: bool = False
-    yield_results: bool = False
     scanner_name: str = ""
     default_args: str = ""
     merged_args: str = ""
