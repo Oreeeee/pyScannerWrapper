@@ -15,6 +15,7 @@ class BaseScanner:
     yield_results: bool = False
     scanner_name: str
     default_args: str
+    merged_args: str
 
     def scan(self) -> None:
         """
@@ -25,12 +26,12 @@ class BaseScanner:
         """
         pass
 
-    def merge_args(self, additional_args: str) -> str:
+    def merge_args(self, additional_args: str) -> None:
         """
-        This method merges additional args, user-provided args and default arguments of the inheriting class.
-        Returns the merged string.
+        This method merges additional args, user-provided args and default arguments of the inheriting class and
+        sets the merged_args attribute of the class to it.
         """
-        return f"{additional_args} {self.scanner_args} {self.default_args}"
+        self.merged_args = f"{additional_args} {self.scanner_args} {self.default_args}"
 
     def scanner_parser(self) -> None:
         """
