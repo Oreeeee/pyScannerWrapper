@@ -33,7 +33,7 @@ class Masscan(BaseScanner):
         # Start masscan
         # We only care about stdout in here, that's where masscan shows the hits
         # stderr and stdin can be /dev/null
-        proc = subprocess.Popen(
+        self.scanner_process = subprocess.Popen(
             f"{self.scanner_name} {self.merged_args}".split(),
             stdout=subprocess.PIPE,
             stderr=subprocess.DEVNULL,
@@ -41,11 +41,11 @@ class Masscan(BaseScanner):
         )
 
         # Start the parsing thread
-        threading.Thread(target=self.scanner_parser, args=(proc,)).start()
+        threading.Thread(target=self.scanner_parser).start()
 
-    def scanner_parser(self, proc: subprocess.Popen) -> None:
+    def scanner_parser(self) -> None:
         while self.running:
-            for line in iter(proc.stdout.readline, b""):
+            for line in iter(self.scanner_process.stdout.readline, b""):
                 line = line.decode("UTF-8").strip()
 
                 ip: str = ""
