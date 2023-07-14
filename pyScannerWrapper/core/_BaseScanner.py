@@ -1,10 +1,13 @@
+from .structs import ScanResults
+
+
 class BaseScanner:
     # Public
     input_ip_list: list
     input_port_list: list
     scanner_args: str
     input_file: str
-    results: dict = {}
+    results: ScanResults = None
     running: bool = False
 
     # Private
