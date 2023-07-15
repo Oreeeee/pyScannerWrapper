@@ -11,6 +11,7 @@ from .structs import ScanResults
 class BaseScanner:
     input_ip_list: list = []
     input_port_list: list = []
+    args: str = ""
     scanner_args: str = ""
     input_file: str = ""
     results: ScanResults = None
@@ -57,12 +58,12 @@ class BaseScanner:
             self.poll_scanner_process()
             time.sleep(0.01)
 
-    def merge_args(self, additional_args: str) -> None:
+    def merge_args(self) -> None:
         """
         This method merges additional args, user-provided args and default arguments of the inheriting class and
         sets the merged_args attribute of the class to it.
         """
-        self.merged_args = f"{additional_args} {self.scanner_args} {self.default_args}"
+        self.merged_args = f"{self.args} {self.scanner_args} {self.default_args}"
 
     def scanner_parser(self) -> None:
         """
