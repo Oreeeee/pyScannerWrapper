@@ -10,7 +10,6 @@ from pyScannerWrapper.structs import ScanResults, ServerResult
 class Masscan(BaseScanner):
     scanner_name = "masscan"
     queue = queue.Queue()
-    sudo = True
 
     def __init__(self):
         self.scanner_path_verify()
