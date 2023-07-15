@@ -40,9 +40,8 @@ class BaseScanner:
                 result = self.queue.get_nowait()
                 yield result
             except queue.Empty:
-                pass
+                time.sleep(0.01)
             self.poll_scanner_process()
-            time.sleep(0.01)
 
     def scan(self) -> None:
         """
@@ -54,9 +53,8 @@ class BaseScanner:
                 result = self.queue.get_nowait()
                 self.results.results.append(result)
             except queue.Empty:
-                pass
+                time.sleep(0.01)
             self.poll_scanner_process()
-            time.sleep(0.01)
 
     def merge_args(self) -> None:
         """
