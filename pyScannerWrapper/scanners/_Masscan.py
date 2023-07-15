@@ -18,10 +18,6 @@ class Masscan(BaseScanner):
         # Initialize results
         self.results = ScanResults(
             scanner_name=self.scanner_name,
-            start_time=None,
-            end_time=None,
-            time_took=None,
-            args=None,
             results=[],
         )
 
