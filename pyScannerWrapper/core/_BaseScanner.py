@@ -18,7 +18,6 @@ class BaseScanner:
     running: bool = False
     scanner_name: str = ""
     default_args: str = ""
-    merged_args: str = ""
     queue = None
     scanner_process: subprocess.Popen = None
     sudo: bool = False
@@ -57,12 +56,15 @@ class BaseScanner:
                 time.sleep(0.01)
             self.poll_scanner_process()
 
-    def merge_args(self) -> None:
+    def make_command(self) -> list:
         """
-        This method merges additional args, user-provided args and default arguments of the inheriting class and
-        sets the merged_args attribute of the class to it.
+        This method will take scanner_name, args, scanner_args, default_args and sudo if specified, add them together and
+        return a list that can be provided to subprocess.Popen()
         """
-        self.merged_args = f"{self.args} {self.scanner_args} {self.default_args}"
+        cmd = f"{self.scanner_name} {self.args} {self.scanner_args} {self.default_args}"
+        if self.sudo:
+            cmd = f"sudo {cmd}"
+        return cmd.split()
 
     def scanner_parser(self) -> None:
         """

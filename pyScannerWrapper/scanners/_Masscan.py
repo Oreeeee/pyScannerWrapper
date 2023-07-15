@@ -39,8 +39,6 @@ class Masscan(BaseScanner):
             mass_ips: str = " ".join(self.input_ip_list)
             self.scanner_args = f"{self.scanner_args} {mass_ips}"
 
-        self.merge_args()
-
         # Make running attribute True
         self.running = True
 
@@ -48,7 +46,7 @@ class Masscan(BaseScanner):
         # We only care about stdout in here, that's where masscan shows the hits
         # stderr and stdin can be /dev/null
         self.scanner_process = subprocess.Popen(
-            f"{self.scanner_name} {self.merged_args}".split(),
+            self.make_command(),
             stdout=subprocess.PIPE,
             stderr=subprocess.DEVNULL,
             stdin=subprocess.DEVNULL,
