@@ -5,7 +5,7 @@ import time
 
 from pyScannerWrapper.exceptions import *
 
-from .structs import ScanResults
+from pyScannerWrapper.structs import ScanResults
 
 
 class BaseScanner:

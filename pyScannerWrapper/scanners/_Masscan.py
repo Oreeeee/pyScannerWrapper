@@ -4,7 +4,7 @@ import threading
 import time
 
 from pyScannerWrapper.core import BaseScanner
-from pyScannerWrapper.core.structs import ScanResults, ServerResult
+from pyScannerWrapper.structs import ScanResults, ServerResult
 
 
 class Masscan(BaseScanner):

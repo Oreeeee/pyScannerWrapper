@@ -10,7 +10,7 @@ setup(
     packages=[
         "pyScannerWrapper",
         "pyScannerWrapper.core",
-        "pyScannerWrapper.core.structs",
+        "pyScannerWrapper.structs",
         "pyScannerWrapper.exceptions",
         "pyScannerWrapper.scanners",
     ],
