@@ -21,6 +21,7 @@ class BaseScanner:
     merged_args: str = ""
     queue = None
     scanner_process: subprocess.Popen = None
+    sudo: bool = False
 
     def scan_internal(self) -> None:
         """
