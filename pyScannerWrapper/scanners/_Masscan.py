@@ -30,8 +30,13 @@ class Masscan(BaseScanner):
             self.scanner_args = f"{self.scanner_args} -iL {input_file}"
 
         # Ports
-        mass_args = ",".join(self.scanner_args)
+        mass_args: str = ",".join(self.scanner_args)
         self.scanner_args = f"{self.scanner_args} -p{mass_args}"
+
+        # IP List
+        if self.input_ip_list != []:
+            mass_ips: str = " ".join(self.input_ip_list)
+            self.scanner_args = f"{self.scanner_args} {mass_ips}"
 
         self.merge_args()
 
