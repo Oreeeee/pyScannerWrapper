@@ -4,7 +4,6 @@ import subprocess
 import time
 
 from pyScannerWrapper.exceptions import *
-
 from pyScannerWrapper.structs import ScanResults
 
 
