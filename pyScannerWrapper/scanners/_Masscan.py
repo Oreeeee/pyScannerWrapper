@@ -25,7 +25,15 @@ class Masscan(BaseScanner):
             results=[],
         )
 
-        self.merge_args("")
+        # Add input file
+        if input_file != "":
+            self.scanner_args = f"{self.scanner_args} -iL {input_file}"
+
+        # Ports
+        mass_args = ",".join(self.scanner_args)
+        self.scanner_args = f"{self.scanner_args} -p{mass_args}"
+
+        self.merge_args()
 
         # Make running attribute True
         self.running = True
