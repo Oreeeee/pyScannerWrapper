@@ -37,11 +37,16 @@ class BaseScanner:
         self.scan_internal()
         while self.running:
             try:
-                result = self.queue.get_nowait()
-                yield result
-            except queue.Empty:
-                time.sleep(0.01)
-            self.poll_scanner_process()
+                try:
+                    result = self.queue.get_nowait()
+                    yield result
+                except queue.Empty:
+                    time.sleep(0.01)
+                self.poll_scanner_process()
+            except (Exception, KeyboardInterrupt) as e:
+                self.running = False
+                self.scanner_process.kill()
+                raise e
 
     def scan(self) -> None:
         """
@@ -50,11 +55,16 @@ class BaseScanner:
         self.scan_internal()
         while self.running:
             try:
-                result = self.queue.get_nowait()
-                self.results.results.append(result)
-            except queue.Empty:
-                time.sleep(0.01)
-            self.poll_scanner_process()
+                try:
+                    result = self.queue.get_nowait()
+                    self.results.results.append(result)
+                except queue.Empty:
+                    time.sleep(0.01)
+                self.poll_scanner_process()
+            except (Exception, KeyboardInterrupt) as e:
+                self.running = False
+                self.scanner_process.kill()
+                raise e
 
     def make_command(self) -> list:
         """
