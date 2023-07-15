@@ -21,17 +21,17 @@ class Masscan(BaseScanner):
             start_time=None,
             end_time=None,
             time_took=None,
-            args="",
+            args=None,
             results=[],
         )
 
         # Add input file
-        if input_file != "":
+        if self.input_file != "":
             self.scanner_args = f"{self.scanner_args} -iL {input_file}"
 
         # Ports
-        mass_args: str = ",".join(self.scanner_args)
-        self.scanner_args = f"{self.scanner_args} -p{mass_args}"
+        mass_ports: str = ",".join(self.input_port_list)
+        self.scanner_args = f"{self.scanner_args} -p{mass_ports}"
 
         # IP List
         if self.input_ip_list != []:
