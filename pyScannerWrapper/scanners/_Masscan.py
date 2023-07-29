@@ -70,9 +70,7 @@ class Masscan(BaseScanner):
                 port = port[: port.find("/")]  # Remove everything after the slash
 
                 # Assign a ServerResult value
-                result = ServerResult(
-                    ip=ip, port=int(port), status="open", time_discovered=None
-                )
+                result = ServerResult(ip=ip, port=int(port))
 
                 # Add these values to queue
                 self.queue.put(result)
