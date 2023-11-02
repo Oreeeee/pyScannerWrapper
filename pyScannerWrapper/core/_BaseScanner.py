@@ -8,18 +8,19 @@ from pyScannerWrapper.structs import ScanResults
 
 
 class BaseScanner:
-    input_ip_list: list = []
-    input_port_list: list = []
-    args: str = ""
-    scanner_args: str = ""
-    input_file: str = ""
-    results: ScanResults = None
-    running: bool = False
-    scanner_name: str = ""
-    default_args: str = ""
-    queue = None
-    scanner_process: subprocess.Popen = None
-    sudo: bool = False
+    def __init__(self):
+        input_ip_list: list = []
+        input_port_list: list = []
+        args: str = ""
+        scanner_args: str = ""
+        input_file: str = ""
+        results: ScanResults = None
+        running: bool = False
+        scanner_name: str = ""
+        default_args: str = ""
+        queue = None
+        scanner_process: subprocess.Popen = None
+        sudo: bool = False
 
     def scan_internal(self) -> None:
         """

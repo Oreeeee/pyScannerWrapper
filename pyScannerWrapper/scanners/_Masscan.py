@@ -10,10 +10,10 @@ from pyScannerWrapper.structs import ScanResults, ServerResult
 
 
 class Masscan(BaseScanner):
-    scanner_name = "masscan"
-    queue = queue.Queue()
-
     def __init__(self):
+        scanner_name = "masscan"
+        queue = queue.Queue()
+
         self.scanner_path_verify()
 
     def scan_internal(self) -> None:
