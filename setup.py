@@ -35,4 +35,5 @@ setup(
         "pyScannerWrapper.exceptions",
         "pyScannerWrapper.scanners",
     ],
+    install_requires=["scanf"],
 )

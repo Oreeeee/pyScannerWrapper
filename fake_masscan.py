@@ -1,4 +1,6 @@
-import time, random, sys
+import random
+import sys
+import time
 
 
 def main():

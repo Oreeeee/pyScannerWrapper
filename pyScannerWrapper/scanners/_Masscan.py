@@ -3,6 +3,8 @@ import subprocess
 import threading
 import time
 
+from scanf import scanf
+
 from pyScannerWrapper.core import BaseScanner
 from pyScannerWrapper.structs import ScanResults, ServerResult
 
@@ -54,23 +56,9 @@ class Masscan(BaseScanner):
         while self.running:
             for line in iter(self.scanner_process.stdout.readline, b""):
                 line = line.decode("UTF-8").strip()
+                parsed_line: tuple = scanf("Discovered open port %s on %s", s=line)
 
-                ip: str = ""
-                port: str = ""
+                ip: str = parsed_line[1]
+                port: int = int(parsed_line[0].replace("/tcp", ""))
 
-                # Get the IP
-                ip = line[::-1]  # Reverse the line
-                ip = ip[: ip.find(" ")]  # Remove everything after first space
-                ip = ip[::-1]  # Reverse the string
-
-                # Get the port
-                port = line.replace(
-                    "Discovered open port ", ""
-                )  # Remove open port prefix
-                port = port[: port.find("/")]  # Remove everything after the slash
-
-                # Assign a ServerResult value
-                result = ServerResult(ip=ip, port=int(port))
-
-                # Add these values to queue
-                self.queue.put(result)
+                self.queue.put(ServerResult(ip=ip, port=int(port)))
